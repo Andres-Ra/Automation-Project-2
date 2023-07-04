@@ -11,7 +11,7 @@ describe('Issue create', () => {
     //System finds modal for creating issue and does next steps inside of it
     cy.get('[data-testid="modal:issue-create"]').within(() => {
       
-      //open issue type dropdown and choose Story
+      //open issue type dropdown and choose Story - comment for Github
       cy.get('[data-testid="select:type"]').click();
       cy.get('[data-testid="select-option:Story"]')
           .trigger('click');
