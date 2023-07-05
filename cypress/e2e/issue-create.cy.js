@@ -120,7 +120,7 @@ Create a new new issue with the following data:
 - reporter “Baby Yoda” 
 */
 
-it.only('Issue creating test - Using faker', () => {
+it('Issue creating test - Using faker', () => {
   //Creating faker data constants
 
   const randomTitle = faker.word.noun(1); //random Title
