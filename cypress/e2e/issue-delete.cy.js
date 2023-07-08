@@ -1,5 +1,3 @@
-
-    
 describe('Tests for covering issue deletion functionality', () => {
         
     const firstIssueTitle = 'This is an issue of type: Task.';
