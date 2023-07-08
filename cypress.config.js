@@ -5,11 +5,25 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl: 'https://jira.ivorreic.com/project/board',
+    baseUrl: "https://jira.ivorreic.com/project/board",
     env: {
-      baseUrl: 'https://jira.ivorreic.com/',
+      baseUrl: "https://jira.ivorreic.com/",
     },
     defaultCommandTimeout: 40000,
     requestTimeout: 20000,
+  },
+
+  component: {
+    devServer: {
+      framework: "react",
+      bundler: "vite",
+    },
+  },
+
+  component: {
+    devServer: {
+      framework: "react",
+      bundler: "vite",
+    },
   },
 });
