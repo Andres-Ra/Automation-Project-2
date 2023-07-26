@@ -32,6 +32,7 @@ beforeEach(() => {
         // Assert that deletion confirmation dialogue doesn't exist
         cy.get(modalConfirm).should('not.exist')
         // Assert that issue is deleted and not displayed on the Jira board anymore
+        cy.reload();
         cy.get('[data-testid="board-list:backlog').should('be.visible').and('have.length', '1').within(() => {
         // Assert that this list now contains 3 issues and first element with tag p hasn't specified text
         cy.get('[data-testid="list-issue"]')
