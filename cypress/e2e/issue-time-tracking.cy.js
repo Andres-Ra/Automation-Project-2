@@ -20,9 +20,6 @@ function closeAndReOpen() {
     cy.get(listIssue).first().click();
 };
 
-// Logi JIRA-sse 21:30 - 02:00 30.07.2023 ja ka LIVE meeting 01.08 1h
-// Eelmise järgi võttis aega 02:03 
-
 describe('Time tracking and Stopwatch', () => {
     beforeEach(() => {
         cy.visit('/');
