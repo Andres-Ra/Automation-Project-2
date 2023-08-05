@@ -61,5 +61,54 @@ describe('Issue details editing', () => {
     });
   });
 
+//Bonus 3 - Task 1
+
+describe('Issue Details page - Priority dropdown', () => {
+  const expectedLength = 5;
+  let priorityOptions = [];
+  const selectPriority = '[data-testid="select:priority"]';
+
+  it('Logging values and arrays in priority list', () => {
+    // Log the selected value and push it into array
+    cy.get(selectPriority).then(($priorityDropdown) => {
+      
+      const selectedPriority = $priorityDropdown.text().trim();
+      priorityOptions.push(selectedPriority);
+      cy.log(`Selected value: ${selectedPriority}, Array length: ${priorityOptions.length}`);
+
+      // Open the dropdown list
+      cy.get(selectPriority).click();
+
+      // Access the list of all priority options
+      cy.get('[data-testid^="select-option"]').each(($option) => {
+        const optionText = $option.text().trim();
+        priorityOptions.push(optionText);
+
+        // Log added value and length of the array during each iteration
+        cy.log(`Option on the list: ${optionText}, Array length: ${priorityOptions.length}`);
+      }).then(() => {
+        // Assert that the created array has the same length as the predefined number
+        expect(priorityOptions.length).to.equal(expectedLength);
+      });
+    });
+  });
+});
+
+//Bonus 3 - Task 2
+
+describe('Issue Details Edit Page - Reporters Name', () => {
+  const pattern = /^[A-Za-z\s]*$/
+
+  it('Reporters name should consist only characters', () => {
+    // Select reporters name and invoke it
+    cy.get('[data-testid="select:reporter"]')
+      .invoke('text')
+      .then((reporterName) => {
+      // Assert that invoked reporters name has only characters using regex
+      expect(reporterName).to.match(pattern);
+    });
+  });
+});
+
   const getIssueDetailsModal = () => cy.get('[data-testid="modal:issue-details"]');
 });
