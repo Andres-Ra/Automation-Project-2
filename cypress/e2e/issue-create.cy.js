@@ -5,9 +5,7 @@ describe('Issue create', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.url().should('eq', `${Cypress.env('baseUrl')}project/board`).then((url) => {
-    //System will already open issue creating modal in beforeEach block  
-    cy.visit(url + '/board?modal-issue-create=true');
-    cy.get(url).contains('/board?modal-issue-create=true')
+        cy.visit(url + '/board?modal-issue-create=true');
     });
   });
 
@@ -177,6 +175,35 @@ it('Issue creating test - Using faker', () => {
 
       //Assert that correct error message is visible
       cy.get('[data-testid="form-field:title"]').should('contain', 'This field is required');
+    });
+  });
+
+  it('Removing unneccessary space', () => {
+    // Doesn't work correclty because somehow the system doesn't trim title correctly..
+    const issueTitle = ' Task with many spaces ';
+    const selectType = '[data-testid="select:type"]';
+    const optionBug = '[data-testid="select-option:Bug"]';
+    const listIssue = '[data-testid="list-issue"]';
+    const issueCreate = '[data-testid="modal:issue-create"]';
+    const inputTitle = 'input[name="title"]';
+    const messageSuccess = 'Issue has been successfully created.';
+    const buttonSubmit = 'button[type="submit"]';
+    let trimmedTitle;
+    
+    cy.get(issueCreate).within(() => {
+      cy.get(selectType).click();
+      cy.get(optionBug).trigger('click');
+      cy.get(inputTitle).debounced('type', issueTitle);
+      cy.get(buttonSubmit).click();
+    });
+    cy.wait(1000);
+    cy.get('[type="success"]').contains(messageSuccess);
+    cy.reload();
+    
+    // Checking newly created task from the board
+    cy.get(listIssue).first().invoke('text').then((actualTitle) =>{
+      trimmedTitle = issueTitle.trim();
+      expect(actualTitle).to.equal(trimmedTitle);
     });
   });
 });
