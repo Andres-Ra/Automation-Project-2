@@ -77,7 +77,7 @@ describe('Time tracking and Stopwatch', () => {
         cy.get(inputNumber).clear()
         getIssueDetailsModal().should('contain', 'No time logged');
         // Waiting for the framework to update the Number value..
-        cy.wait(3000);
+        cy.wait(1000);
         closeAndReOpen();
 
         // Checking that time is removed and have no value
